@@ -40,7 +40,11 @@ request.post({
                     }
 
                     for (var property in itemParse) {
-                        rowArr.push(itemParse[property]);
+                        if (!itemParse[property]) {
+                            rowArr.push('-');
+                        } else {
+                            rowArr.push(itemParse[property]);
+                        }
                     }
 
                     fs.appendFile(fileName, rowArr.toString() + '\n', 'utf8', function(error) {
