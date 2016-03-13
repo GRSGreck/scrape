@@ -4,12 +4,13 @@
   "description": "",
   "main": "scrape.js",
   "scripts": {
-    "test": "nodemon scrape.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node scrape.js"
   },
   "author": "Hrechuk Roman",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^0.20.0",
-    "request": "^2.69.0"
+    "cheerio": "0.20.0",
+    "request": "2.69.0"
   }
 }

@@ -1,7 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var fs = require('fs');
-var path = require('path');
 var url = 'http://test.infobus.eu/server/curl/get_points.php';
 
 var auth = {
@@ -14,7 +13,7 @@ request.post({
     form: {
         login: auth.login,
         password: auth.password,
-        //trans: 'train'
+        trans: 'train'
         //viev: 'get_country'
         //viev: 'group_country'
     }
@@ -31,6 +30,7 @@ request.post({
             if (error) {
                 console.error(error.message);
             } else {
+
                 $Item.each(function(index, element) {
                     var $element = $(element);
 
@@ -51,30 +51,6 @@ request.post({
                     rowArr = [];
                     itemParse = {};
                 });
-
-/*                console.log('>> Полученные данные записаны в файл "' + fileName + '".');
-                console.log('>> Cодержимое файла "' + fileName + '":\n');
-                var readStreamFile = fs.createReadStream(fileName, {encoding: 'utf-8'});
-
-                readStreamFile.on('readable', function() {
-                    var data = readStreamFile.read();
-
-                    if (data !== null) {
-                        console.log(data);
-                    }
-                });
-
-                readStreamFile.on('end', function() {
-                    console.log('>> Чтение файла закончено!!!');
-                });
-
-                readStreamFile.on('error', function(err) {
-                    if (error.code === 'ENOENT') {
-                        console.log('Файл не найден...');
-                    } else {
-                        console.error(error);
-                    }
-                });*/
             }
         });
     } else {
