@@ -14,13 +14,16 @@ request.post({
     form: {
         login: auth.login,
         password: auth.password,
-        //trans: 'train'
+        trans: 'train'
+        //viev: 'get_country'
+        //viev: 'group_country'
     }
 }, function(error, res, body) {
     if (!error && res.statusCode === 200) {
         var $ = cheerio.load(body);
         var $Item = $('root').find('item');
         var fileName = 'result.csv';
+        var itemParse = {};
         var rowArr = [];
         var pattern = /\<[a-zA-Z_]+?\>/gi;
 
@@ -31,26 +34,10 @@ request.post({
                 $Item.each(function(index, element) {
                     var $element = $(element);
 
-                    //console.log($element.html().match(pattern));
-                    //while (match = pattern.exec($element.html())) {
-                    //    console.log(match[0]);
-                    //}
-                    //console.log('');
-                    //console.log(pattern.exec($element.html())[0]);
-                    //console.log($element.html());
-
-                    var itemParse = {
-                        pointId: $element.find('point_id').text(),
-                        pointLatinName: $element.find('point_latin_name').text(),
-                        pointRuName: $element.find('point_ru_name').text(),
-                        pointUaName: $element.find('point_ua_name').text(),
-                        countryName: $element.find('country_name').text(),
-                        countryKod: $element.find('country_kod').text(),
-                        countryKodTwo: $element.find('country_kod_two').text(),
-                        countryId: $element.find('country_id').text(),
-                        latitude: $element.find('latitude').text(),
-                        longitude: $element.find('longitude').text()
-                    };
+                    while (match = pattern.exec($element.html())) {
+                        var tagName = match[0].replace('<', '').replace('>', '');
+                        itemParse[tagName] =  $element.find(tagName).text();
+                    }
 
                     for (var property in itemParse) {
                         rowArr.push(itemParse[property]);
@@ -62,7 +49,7 @@ request.post({
                         }
                     });
                     rowArr = [];
-
+                    itemParse = {};
                 });
 
                 console.log('>> Полученные данные записаны в файл "' + fileName + '".');
