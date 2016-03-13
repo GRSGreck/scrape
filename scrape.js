@@ -13,7 +13,7 @@ request.post({
     form: {
         login: auth.login,
         password: auth.password,
-        trans: 'train'
+        //trans: 'train'
         //viev: 'get_country'
         //viev: 'group_country'
     }
@@ -40,11 +40,7 @@ request.post({
                     }
 
                     for (var property in itemParse) {
-                        if (!itemParse[property]) {
-                            rowArr.push('-');
-                        } else {
-                            rowArr.push(itemParse[property]);
-                        }
+                        rowArr.push(itemParse[property]);
                     }
 
                     fs.appendFile(fileName, rowArr.toString() + '\n', 'utf8', function(error) {
