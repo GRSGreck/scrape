@@ -14,7 +14,7 @@ request.post({
     form: {
         login: auth.login,
         password: auth.password,
-        trans: 'train'
+        //trans: 'train'
         //viev: 'get_country'
         //viev: 'group_country'
     }
@@ -52,7 +52,7 @@ request.post({
                     itemParse = {};
                 });
 
-                console.log('>> Полученные данные записаны в файл "' + fileName + '".');
+/*                console.log('>> Полученные данные записаны в файл "' + fileName + '".');
                 console.log('>> Cодержимое файла "' + fileName + '":\n');
                 var readStreamFile = fs.createReadStream(fileName, {encoding: 'utf-8'});
 
@@ -74,7 +74,7 @@ request.post({
                     } else {
                         console.error(error);
                     }
-                });
+                });*/
             }
         });
     } else {
