@@ -9,8 +9,8 @@ var auth = {
 };
 
 /*
- * Коннектимся к ресурсу по заданному url с помощью модуля "request"
- * для получения доступа нам понадобится ввести login и password
+ * Коннектимся к ресурсу по заданному url с помощью модуля "request".
+ * Для получения доступа нам понадобится ввести login и password,
  * так же мы можем передать дополнительные параметры:
  * - trans: 'train'
  * - viev: 'get_country'
@@ -45,7 +45,7 @@ request.post({
          */
         fs.writeFile(fileName, '', function(error) {
             if (error) {
-                console.error(error.message);
+                console.error(error);
             } else {
 
                 /*
@@ -75,7 +75,7 @@ request.post({
                     }
 
                     /*
-                     * При каждом цикле добавляем соответствующую строку данных в файл "result.csv"
+                     * При каждом цикле ($Item.each()) добавляем соответствующую строку данных в файл "result.csv"
                      * путем преобразования массива в строку ([a, b, c].toString() => a,b,c)
                      */
                     fs.appendFile(fileName, rowArr.toString() + '\n', 'utf8', function(error) {
@@ -83,6 +83,8 @@ request.post({
                             console.error(error);
                         }
                     });
+
+                    // Делаем очистку массива "rowArr" и объекта "itemParse" для следующей итерации цикла
                     rowArr = [];
                     itemParse = {};
                 });
