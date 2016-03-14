@@ -75,8 +75,9 @@ request.post({
                     }
 
                     /*
-                     * При каждом цикле ($Item.each()) добавляем соответствующую строку данных в файл "result.csv"
-                     * путем преобразования массива в строку ([a, b, c].toString() => a,b,c)
+                     * При каждой итерации цикла ($Item.each()) добавляем соответствующую строку
+                     * данных в файл "result.csv" путем преобразования массива в строку
+                     * ([a, b, c].toString() => a,b,c)
                      */
                     fs.appendFile(fileName, rowArr.toString() + '\n', 'utf8', function(error) {
                         if (error) {
